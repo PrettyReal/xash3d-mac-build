@@ -1,0 +1,8 @@
+# Build artifacts
+/tmp/
+*.dylib
+*.bin
+*.framework/
+
+# macOS
+.DS_Store
