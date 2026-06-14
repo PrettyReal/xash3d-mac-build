@@ -1,22 +1,17 @@
 # Half-Life for macOS
 
-Запуск **Half-Life** (1998) на macOS как нативное приложение.
+Запуск **Half-Life**, **Opposing Force** и **Blue Shift** на macOS как нативное приложение.
 
 Использует открытый движок [Xash3D FWGS](https://github.com/FWGS/xash3d-fwgs) — кроссплатформенную реализацию GoldSrc引擎, совместимую с оригинальным движком Half-Life.
 
 ## Что это даёт
 
 - Нативное `.app` приложение — двойной клик в Finder
+- Поддержка трёх игр: Half-Life, Opposing Force, Blue Shift
 - OpenGL рендерер (и софтверный как запасной)
-- Полная совместимость с оригинальной Half-Life и модами
+- Полная совместимость с оригинальными модами и картами
 - Работает на macOS 10.13 High Sierra и новее
-- Поддержка карт, модов, серверов, голосового чата
-
-## Сcreenshot
-
-```
-Полноценная Half-Life на macOS — с OpenGL, звуком и сетевой игрой
-```
+- Сетевая игра, голосовой чат, мастер-серверы
 
 ## Требования
 
@@ -41,25 +36,27 @@ chmod +x build.sh
 
 Скрипт автоматически:
 1. Скачает SDL2, Xash3D FWGS и Half-Life SDK
-2. Соберёт все компоненты
-3. Создаст приложение `/Applications/Half-Life.app`
-
-### Копирование ресурсов игры
-
-После сборки скопируйте папку `valve` из вашей Half-Life:
-
-```bash
-cp -R ~/Library/Application\ Support/Steam/steamapps/common/Half-Life/valve \
-    /Applications/Half-Life.app/Contents/Resources/valve
-```
+2. Соберёт движок и все три игры (valve, gearbox, bshift) в 64-bit
+3. Создаст приложение `~/Half-Life.app`
+4. Подключит ресурсы из Steam
 
 ### Запуск
 
 ```bash
-open /Applications/Half-Life.app
+open ~/Half-Life.app
 ```
 
-Или просто двойной клик в Finder / Launchpad.
+Или двойной клик в Finder / Launchpad.
+
+## Поддерживаемые игры
+
+| Игра | Папка | Описание |
+|------|-------|----------|
+| Half-Life | `valve` | Оригинальная кампания |
+| Opposing Force | `gearbox` | Дополнение от Gearbox |
+| Blue Shift | `bshift` | Дополнение от Gearbox |
+
+Все три игры требуют легальную копию Half-Life из Steam.
 
 ## Структура приложения
 
@@ -78,20 +75,17 @@ Half-Life.app/
 │   │   ├── filesystem_stdio.dylib
 │   │   └── SDL2.framework
 │   └── Resources/
-│       └── valve/                ← ресурсы игры
-│           ├── maps/
-│           ├── models/
-│           ├── sounds/
-│           ├── cl_dlls/
-│           ├── dlls/
-│           └── ...
+│       └── valve/                ← ресурсы игры (симлинк на Steam)
 ```
 
 ## Решение проблем
 
 ### "couldn't find game directory valve"
 
-Убедитесь что папка `valve` скопирована в `Contents/Resources/valve`.
+Убедитесь что Half-Life установлена в Steam и папка существует:
+```bash
+ls ~/Library/Application\ Support/Steam/steamapps/common/Half-Life/
+```
 
 ### Движок не запускается
 
@@ -110,8 +104,8 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 Попробуйте софт-рендерер:
 ```bash
-DYLD_LIBRARY_PATH=/Applications/Half-Life.app/Contents/Frameworks \
-    /Applications/Half-Life.app/Contents/Frameworks/xash3d.bin -renderer software
+DYLD_LIBRARY_PATH=~/Half-Life.app/Contents/Frameworks \
+    ~/Half-Life.app/Contents/Frameworks/xash3d.bin -renderer software
 ```
 
 ## Что собирается
