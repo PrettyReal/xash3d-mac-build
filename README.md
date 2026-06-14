@@ -1,17 +1,19 @@
-# Half-Life for macOS
+# Half-Life & Counter-Strike 1.6 for macOS
 
-Запуск **Half-Life**, **Opposing Force** и **Blue Shift** на macOS как нативное приложение.
+Запуск **Half-Life**, **Opposing Force**, **Blue Shift** и **Counter-Strike 1.6** на macOS как нативные приложения.
 
 Использует открытый движок [Xash3D FWGS](https://github.com/FWGS/xash3d-fwgs) — кроссплатформенную реализацию GoldSrc引擎, совместимую с оригинальным движком Half-Life.
 
 ## Что это даёт
 
 - Нативное `.app` приложение — двойной клик в Finder
-- Поддержка трёх игр: Half-Life, Opposing Force, Blue Shift
+- Поддержка четырёх игр: Half-Life, Opposing Force, Blue Shift, Counter-Strike 1.6
+- Отдельные `.app` для Half-Life и CS 1.6
 - OpenGL рендерер (и софтверный как запасной)
 - Полная совместимость с оригинальными модами и картами
 - Работает на macOS 10.13 High Sierra и новее
 - Сетевая игра, голосовой чат, мастер-серверы
+- Counter-Strike 1.6 с ReGameDLL (античит, исправления)
 
 ## Требования
 
@@ -55,8 +57,10 @@ open ~/Half-Life.app
 | Half-Life | `valve` | Оригинальная кампания |
 | Opposing Force | `gearbox` | Дополнение от Gearbox |
 | Blue Shift | `bshift` | Дополнение от Gearbox |
+| Counter-Strike 1.6 | `cstrike` | Мультиплеер с ReGameDLL |
 
-Все три игры требуют легальную копию Half-Life из Steam.
+Half-Life, Opposing Force и Blue Shift требуют легальную копию Half-Life из Steam.
+Counter-Strike 1.6 требует отдельные ресурсы (модели, звуки, карты).
 
 ## Структура приложения
 
@@ -113,8 +117,10 @@ DYLD_LIBRARY_PATH=~/Half-Life.app/Contents/Frameworks \
 | Компонент | Источник |
 |-----------|----------|
 | Xash3D FWGS | [github.com/FWGS/xash3d-fwgs](https://github.com/FWGS/xash3d-fwgs) |
-| SDL2 | [github.com/libsdl-org/SDL](https://github.com/libsdl-org/SDL) (ветка SDL2) |
+| SDL2 | [github.com/nicknumber9/SDL-macos](https://github.com/nicknumber9/SDL-macos) |
 | HLSDK | [github.com/FWGS/hlsdk-portable](https://github.com/FWGS/hlsdk-portable) |
+| CS 1.6 Client | [github.com/Velaron/cs16-client](https://github.com/Velaron/cs16-client) |
+| ReGameDLL | встроен в cs16-client |
 
 ## Лицензия
 
