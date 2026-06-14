@@ -9,7 +9,7 @@ mkdir -p "$XASHDIR"
 
 STEAM_HL="$HOME/Library/Application Support/Steam/steamapps/common/Half-Life/Half-Life.app/Contents/Resources"
 
-for mod in valve gearbox bshift; do
+for mod in valve gearbox bshift cstrike; do
     if [ -d "$STEAM_HL/$mod" ] && [ ! -L "$XASHDIR/$mod" ] && [ ! -d "$XASHDIR/$mod" ]; then
         ln -s "$STEAM_HL/$mod" "$XASHDIR/$mod"
     fi
